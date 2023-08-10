@@ -18,3 +18,10 @@
 .player {
   background-color: blue;
 }
+
+.target {
+  background-color: red;
+}
+.ball {
+  background-color: green;
+}
