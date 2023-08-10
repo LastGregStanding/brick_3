@@ -111,12 +111,15 @@ drawBall();
 //#endregion
 
 let ballMove = function () {
+  // Up left
   if (direction === "left" && gravity === "up") {
     upLeft();
     if (ballIndex - 49 < 0 || ballIndex % width === 0) {
       direction = "right";
     }
   }
+
+  // Up Right
   if (direction === "right" && gravity === "up") {
     upRight();
     if (ballIndex - 49 < 0 || ballIndex + (51 % width) === 0) {
@@ -124,6 +127,7 @@ let ballMove = function () {
     }
   }
 
+  // Down Right
   if (direction === "right" && gravity === "down") {
     downRight();
     if ((ballIndex + 51) % width === 0) {
@@ -132,6 +136,7 @@ let ballMove = function () {
     }
   }
 
+  // Down Left
   if (direction === "left" && gravity === "down") {
     downLeft();
     if (ballIndex % width === 0) {
@@ -140,6 +145,7 @@ let ballMove = function () {
     }
   }
 
+  // Hits player
   if (
     cells[ballIndex + width].classList.contains("player") &&
     gravity === "down"
@@ -147,6 +153,7 @@ let ballMove = function () {
     gravity = "up";
   }
 
+  // If ball hits target
   targets.forEach((target) => {
     target.forEach((index) => {
       if (cells[index].classList.contains("ball")) {
