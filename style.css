@@ -1,3 +1,20 @@
 * {
   background-color: black;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(50, 1fr);
+  height: 500px;
+  width: 500px;
+  border: yellow solid 1px;
+}
+
+.cell {
+  background-color: white;
+  /* border: red solid 1px; */
+}
+
+.player {
+  background-color: blue;
+}
