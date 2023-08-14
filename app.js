@@ -42,7 +42,8 @@ drawTargets();
 
 //#region Paddle
 let paddle = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-let paddleIndex = 2220;
+let paddleIndex = 2221;
+// cells[2249].style.backgroundColor = "red";
 
 const drawPaddle = function () {
   paddle.forEach((e) => cells[e + paddleIndex].classList.add("player"));
@@ -58,18 +59,18 @@ document.addEventListener("keydown", function (key) {
   switch (key.keyCode) {
     case 65:
       if (paddleIndex % width === 0) {
-        paddleIndex += 3;
+        paddleIndex += 5;
       }
       erasePaddle();
-      paddleIndex -= 3;
+      paddleIndex -= 5;
       drawPaddle();
       break;
     case 68:
-      if (paddleIndex % (width + 6) === 2) {
-        paddleIndex -= 3;
+      if ((paddleIndex + 9) % width === 0) {
+        paddleIndex -= 5;
       }
       erasePaddle();
-      paddleIndex += 3;
+      paddleIndex += 5;
       drawPaddle();
       break;
   }
@@ -122,8 +123,10 @@ let ballMove = function () {
   // Up Right
   if (direction === "right" && gravity === "up") {
     upRight();
-    if (ballIndex - 49 < 0 || ballIndex + (51 % width) === 0) {
+    if (ballIndex - 49 < 0) {
       gravity = "down";
+    } else if ((ballIndex + 1) % width === 0) {
+      direction = "left";
     }
   }
 
@@ -157,13 +160,25 @@ let ballMove = function () {
   targets.forEach((target) => {
     target.forEach((index) => {
       if (cells[index].classList.contains("ball")) {
-        target.forEach(
-          (target) => (cells[target].style.backgroundColor = "blue")
-        );
+        cells[index].classList.remove("target");
         gravity = "down";
-        direction === "left" ? "right" : "left";
+        direction === "left" ? "right" : "left ";
       }
     });
   });
 };
-// setInterval(ballMove, 50);
+
+// Hit space bar to start game
+document.addEventListener("keydown", function (key) {
+  if (key.keyCode === 32) {
+    setInterval(ballMove, 50);
+  }
+});
+
+console.log(targets);
+
+/*
+
+Trying to figure out how to eliminate the entire target once hit.
+
+*/
